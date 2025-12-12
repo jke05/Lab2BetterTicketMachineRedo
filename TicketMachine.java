@@ -17,13 +17,23 @@ public class TicketMachine
     private int balance;
     // The total amount of money collected by this machine.
     private int total;
+    
+    private int saving;
+    
+    private int discount;
+    
+    private double mean;
+    
+    private int count;
+    
+    private int amountLeftToPay;
 
     /**
      * Create a machine that issues tickets of the given price.
      */
     public TicketMachine(int cost)
     {
-        price = cost;
+        int price = cost;
         balance = 0;
         total = 0;
     }
@@ -65,7 +75,9 @@ public class TicketMachine
      */
     public void printTicket()
     {
-        if(balance >= price) {
+        amountLeftToPay = price - balance;
+        if(amountLeftToPay <= 0) {
+            
             // Simulate the printing of a ticket.
             System.out.println("##################");
             System.out.println("# The BlueJ Line");
@@ -80,8 +92,7 @@ public class TicketMachine
             balance = balance - price;
         }
         else {
-            System.out.printf("You must insert at least %d more cents.%n",
-                              price - balance);
+            System.out.printf("You must insert at least %d more cents.%n", amountLeftToPay);
         }
     }
 
@@ -96,4 +107,27 @@ public class TicketMachine
         balance = 0;
         return amountToRefund;
     }
+    
+    public void multiply(){
+        saving = price * discount;
+    }
+    
+    public void divide(){
+        mean = total/count;
+    }
+    
+    public void afforable(int budget){
+        if(price > budget){
+            System.out.println("Too expensive");
+        }else{
+            System.out.println("Just right");
+        }
+    }
+    
+    public void empty(){
+        System.out.println(total);
+        total = 0;
+    }
+    
+    
 }
